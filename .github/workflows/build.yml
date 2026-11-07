@@ -14,6 +14,7 @@ jobs:
           cd ressoa
           sed -i 's/KERNELRESULT(SessionClosed)/KERNELRESULT(ConnectionClosed)/' sysmodule/src/main.cpp
           sed -i 's/info\.hz/info.sample_rate/g' sysmodule/src/player.cpp
+          sed -i 's/-fno-rtti//' overlay/Makefile
           sh fetch_deps.sh
           make dist
       - uses: actions/upload-artifact@v4
