@@ -1,0 +1,20 @@
+name: Build Ressoa
+on: [push, workflow_dispatch]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: devkitpro/devkita64
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compilar
+        run: |
+          apt-get update && apt-get install -y zip unzip curl git
+          dkp-pacman -S --needed --noconfirm switch-curl switch-mbedtls switch-zlib
+          unzip -q Ressoa-fonte*.zip
+          cd ressoa
+          sh fetch_deps.sh
+          make dist
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Ressoa
+          path: ressoa/Ressoa.zip
