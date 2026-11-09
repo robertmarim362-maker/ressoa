@@ -10,7 +10,7 @@ jobs:
         run: |
           apt-get update && apt-get install -y zip unzip curl git
           dkp-pacman -S --needed --noconfirm switch-curl switch-mbedtls switch-zlib
-          unzip -q Ressoa-fonte*.zip
+          unzip -oq "$(ls Ressoa*.zip | head -n 1)"
           cd ressoa
           sed -i 's/KERNELRESULT(SessionClosed)/KERNELRESULT(ConnectionClosed)/' sysmodule/src/main.cpp
           sed -i 's/info\.hz/info.sample_rate/g' sysmodule/src/player.cpp
